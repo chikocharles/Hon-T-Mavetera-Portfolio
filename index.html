@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="https://upload.wikimedia.org/wikipedia/commons/6/6a/Flag_of_Zimbabwe.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hon. Tatenda Mavetera | Minister of ICTPCS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      /* Variables */
+      :root {
+        --slate-50: #f8fafc;
+        --slate-100: #f1f5f9;
+        --slate-200: #e2e8f0;
+        --slate-300: #cbd5e1;
+        --slate-400: #94a3b8;
+        --slate-500: #64748b;
+        --slate-600: #475569;
+        --slate-700: #334155;
+        --slate-800: #1e293b;
+        --slate-900: #0f172a;
+        --slate-950: #020617;
+        
+        --gold-400: #fbbf24;
+        --gold-500: #f59e0b;
+        --gold-600: #d97706;
+        
+        --white: #ffffff;
+        --black: #000000;
+        
+        --font-sans: 'Inter', sans-serif;
+      }
+
+      /* Reset & Base */
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; }
+      body { font-family: var(--font-sans); background-color: var(--white); color: var(--slate-900); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+      a { text-decoration: none; color: inherit; transition: color 0.2s; }
+      button { font-family: inherit; cursor: pointer; border: none; outline: none; }
+      img { max-width: 100%; display: block; }
+      svg { display: block; }
+
+      /* Layout Utilities */
+      .container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 1rem; }
+      .section { padding: 5rem 0; }
+      .bg-slate-50 { background-color: var(--slate-50); }
+      .bg-white { background-color: var(--white); }
+      .bg-slate-900 { background-color: var(--slate-900); }
+      .text-center { text-align: center; }
+      .flex { display: flex; }
+      .items-center { align-items: center; }
+      .justify-between { justify-content: space-between; }
+      .justify-center { justify-content: center; }
+      .flex-col { flex-direction: column; }
+      .grid { display: grid; }
+      .hidden { display: none; }
+      
+      @media (min-width: 640px) { .container { padding: 0 1.5rem; } }
+      @media (min-width: 768px) { 
+        .md-flex-row { flex-direction: row; } 
+        .md-text-left { text-align: left; }
+        .md-block { display: block; }
+        .md-hidden { display: none; }
+      }
+      @media (min-width: 1024px) { .container { padding: 0 2rem; } }
+
+      /* Navbar */
+      .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.25rem 0; transition: all 0.3s ease; }
+      .navbar.scrolled { background-color: rgba(255, 255, 255, 0.9); backdrop-filter: blur(8px); padding: 0.75rem 0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+      .nav-brand { font-weight: 700; font-size: 1.5rem; color: var(--slate-900); }
+      .navbar:not(.scrolled) .nav-brand.desktop-white { color: var(--slate-900); }
+      @media (min-width: 1024px) { .navbar:not(.scrolled) .nav-brand.desktop-white { color: var(--white); } }
+      
+      .nav-desktop { display: none; gap: 2rem; margin-left: 2.5rem; }
+      .nav-link { font-size: 0.875rem; font-weight: 500; color: var(--slate-100); padding: 0.5rem 0.75rem; border-radius: 0.375rem; }
+      .nav-link:hover { color: var(--gold-400); }
+      .navbar.scrolled .nav-link { color: var(--slate-700); }
+      .navbar.scrolled .nav-link:hover { color: var(--gold-600); }
+      @media (min-width: 768px) { .nav-desktop { display: flex; } }
+
+      .nav-mobile-btn { background: transparent; padding: 0.5rem; color: var(--white); }
+      .navbar.scrolled .nav-mobile-btn { color: var(--slate-900); }
+      .mobile-menu { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: var(--white); padding: 0.5rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+      .mobile-menu.open { display: block; }
+      .mobile-link { display: block; padding: 0.75rem 1rem; color: var(--slate-700); font-weight: 500; border-radius: 0.375rem; }
+      .mobile-link:hover { color: var(--gold-600); background-color: var(--slate-50); }
+
+      /* Hero */
+      .hero { position: relative; height: 100vh; display: flex; align-items: center; overflow: hidden; }
+      .hero-bg { position: absolute; inset: 0; z-index: 0; }
+      .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
+      .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(15,23,42,0.9), rgba(15,23,42,0.4)); }
+      .hero-content { position: relative; z-index: 10; width: 100%; }
+      .hero-badge { display: inline-flex; align-items: center; padding: 0.25rem 0.75rem; border: 1px solid rgba(251,191,36,0.5); background: rgba(245,158,11,0.1); backdrop-filter: blur(4px); border-radius: 9999px; margin-bottom: 1.5rem; }
+      .hero-badge span { color: var(--gold-400); font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+      
+      .hero h1 { font-size: 2.5rem; font-weight: 700; color: var(--white); margin-bottom: 1.5rem; line-height: 1.1; }
+      .text-gradient { background: linear-gradient(to right, var(--gold-400), #fef08a); -webkit-background-clip: text; color: transparent; }
+      .hero p { font-size: 1.125rem; color: var(--slate-300); margin-bottom: 2rem; max-width: 40rem; line-height: 1.6; }
+      
+      .btn-group { display: flex; flex-direction: column; gap: 1rem; }
+      .btn { display: inline-flex; align-items: center; justify-content: center; padding: 1rem 2rem; font-weight: 600; border-radius: 0.5rem; transition: all 0.2s; gap: 0.5rem; }
+      .btn-primary { background-color: var(--gold-500); color: var(--white); box-shadow: 0 10px 15px -3px rgba(245, 158, 11, 0.3); }
+      .btn-primary:hover { background-color: var(--gold-600); }
+      .btn-secondary { background-color: rgba(255,255,255,0.1); color: var(--white); border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(4px); }
+      .btn-secondary:hover { background-color: rgba(255,255,255,0.2); }
+      .hero-deco { position: absolute; bottom: 0; left: 0; width: 100%; height: 6rem; background: linear-gradient(to top, var(--slate-50), transparent); z-index: 20; }
+      
+      @media (min-width: 768px) { 
+        .hero h1 { font-size: 3.75rem; } 
+        .btn-group { flex-direction: row; }
+      }
+      @media (min-width: 1024px) { .hero h1 { font-size: 4.5rem; } }
+
+      /* About */
+      .about-grid { gap: 3rem; align-items: center; }
+      .about-img-wrapper { position: relative; border-radius: 1rem; overflow: hidden; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
+      .about-bg-deco { position: absolute; top: 2.5rem; left: -2.5rem; width: 100%; height: 100%; background-color: var(--slate-100); border-radius: 1rem; z-index: -1; }
+      .section-subtitle { font-size: 0.875rem; font-weight: 700; color: var(--gold-600); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+      .section-title { font-size: 2rem; font-weight: 700; color: var(--slate-900); margin-bottom: 1.5rem; }
+      .about-text p { color: var(--slate-600); margin-bottom: 1.5rem; font-size: 1.125rem; }
+      .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      .stat-card { border-left: 4px solid; padding-left: 1rem; }
+      .stat-card.gold { border-color: var(--gold-500); }
+      .stat-card.dark { border-color: var(--slate-800); }
+      .stat-val { display: block; font-size: 1.5rem; font-weight: 700; color: var(--slate-900); }
+      .stat-label { font-size: 0.875rem; color: var(--slate-500); }
+      @media (min-width: 1024px) { .about-grid { grid-template-columns: 1fr 1fr; } }
+
+      /* Experience Timeline */
+      .divider { height: 0.25rem; width: 5rem; background-color: var(--gold-500); margin: 1rem auto; border-radius: 9999px; }
+      .timeline-container { position: relative; margin-top: 3rem; }
+      .timeline-line { position: absolute; left: 1rem; top: 0; bottom: 0; width: 2px; background-color: var(--slate-200); }
+      .timeline-item { position: relative; display: flex; flex-direction: column; gap: 2rem; margin-bottom: 3rem; }
+      .timeline-dot { position: absolute; left: 1rem; top: 1.5rem; width: 1.25rem; height: 1.25rem; background-color: var(--gold-500); border: 4px solid var(--white); border-radius: 50%; transform: translateX(-50%); z-index: 10; box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05); }
+      .timeline-content-wrapper { padding-left: 3rem; padding-right: 1rem; }
+      .timeline-card { background-color: var(--white); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid var(--slate-100); box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1); transition: box-shadow 0.3s; }
+      .timeline-card:hover { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+      .timeline-meta { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--gold-600); font-weight: 600; text-transform: uppercase; margin-bottom: 0.5rem; }
+      .timeline-card h3 { font-size: 1.25rem; font-weight: 700; color: var(--slate-900); margin-bottom: 0.25rem; }
+      .timeline-org { color: var(--slate-500); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+      .timeline-desc { color: var(--slate-600); font-size: 0.875rem; line-height: 1.5; }
+      .timeline-tag { display: inline-flex; align-items: center; padding: 0.125rem 0.625rem; background-color: var(--slate-100); color: var(--slate-800); border-radius: 9999px; font-size: 0.75rem; font-weight: 500; margin-top: 1rem; text-transform: capitalize; }
+      
+      @media (min-width: 768px) {
+        .timeline-line { left: 50%; transform: translateX(-50%); }
+        .timeline-dot { left: 50%; }
+        .timeline-item { flex-direction: row; align-items: flex-start; }
+        .timeline-spacer { width: 50%; }
+        .timeline-content-wrapper { width: 50%; padding: 0; }
+        
+        .timeline-item.left { flex-direction: row-reverse; }
+        .timeline-item.left .timeline-content-wrapper { padding-right: 3rem; text-align: right; }
+        .timeline-item.left .timeline-meta, .timeline-item.left .timeline-org { justify-content: flex-end; }
+        .timeline-item.left .timeline-tag { margin-left: auto; }
+
+        .timeline-item.right .timeline-content-wrapper { padding-left: 3rem; text-align: left; }
+      }
+
+      /* Education */
+      .edu-grid { grid-template-columns: 1fr; gap: 1.5rem; margin-top: 3rem; }
+      .edu-card { background-color: var(--slate-50); padding: 1.5rem; border-radius: 1rem; border: 1px solid var(--slate-100); transition: all 0.3s; }
+      .edu-card:hover { background-color: var(--slate-900); border-color: var(--slate-800); }
+      .edu-icon { width: 3rem; height: 3rem; background-color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; transition: background-color 0.3s; }
+      .edu-card:hover .edu-icon { background-color: var(--gold-500); }
+      .edu-icon svg { color: var(--gold-600); transition: color 0.3s; }
+      .edu-card:hover .edu-icon svg { color: var(--white); }
+      .edu-card h3 { font-size: 1.125rem; font-weight: 700; color: var(--slate-900); margin-bottom: 0.5rem; height: 3.5rem; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+      .edu-card:hover h3 { color: var(--white); }
+      .edu-card p { color: var(--slate-600); font-size: 0.875rem; margin-bottom: 1rem; }
+      .edu-card:hover p { color: var(--slate-300); }
+      .edu-footer { border-top: 1px solid var(--slate-200); padding-top: 1rem; display: flex; justify-content: space-between; align-items: center; }
+      .edu-card:hover .edu-footer { border-color: var(--slate-700); }
+      .edu-period { font-size: 0.75rem; font-weight: 500; color: var(--slate-400); }
+      .edu-status { font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.5rem; border-radius: 9999px; }
+      .status-completed { background-color: #dcfce7; color: #166534; }
+      .edu-card:hover .status-completed { background-color: #14532d; color: #86efac; }
+      .status-progress { background-color: #fef3c7; color: #92400e; }
+      .edu-card:hover .status-progress { background-color: #78350f; color: #fcd34d; }
+      @media (min-width: 768px) { .edu-grid { grid-template-columns: 1fr 1fr; } }
+      @media (min-width: 1024px) { .edu-grid { grid-template-columns: repeat(4, 1fr); } }
+
+      /* Contact */
+      .contact-grid { grid-template-columns: 1fr; gap: 4rem; }
+      .contact-left p { color: var(--slate-400); font-size: 1.125rem; margin-bottom: 2.5rem; }
+      .contact-item { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.5rem; }
+      .icon-box { padding: 0.75rem; background-color: rgba(255,255,255,0.1); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; transition: background-color 0.2s; }
+      .contact-link:hover .icon-box { background-color: #2563eb; }
+      .icon-box svg { color: var(--gold-500); }
+      .contact-link:hover .icon-box svg { color: var(--white); }
+      .contact-info h4 { font-weight: 600; font-size: 1.125rem; color: var(--white); margin-bottom: 0.25rem; transition: color 0.2s; }
+      .contact-link:hover h4 { color: #60a5fa; }
+      .contact-info p { color: var(--slate-400); font-size: 1rem; margin: 0; }
+      
+      .contact-form { background-color: var(--white); padding: 2rem; border-radius: 1rem; color: var(--slate-900); }
+      .form-row { display: grid; gap: 1rem; margin-bottom: 1rem; }
+      .form-group { margin-bottom: 1rem; }
+      .form-label { display: block; font-size: 0.875rem; font-weight: 500; color: var(--slate-700); margin-bottom: 0.25rem; }
+      .form-input, .form-select, .form-textarea { width: 100%; padding: 0.5rem 1rem; border: 1px solid var(--slate-300); border-radius: 0.5rem; font-size: 1rem; outline: none; font-family: inherit; }
+      .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--gold-500); box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2); }
+      .form-btn { width: 100%; background-color: var(--gold-500); color: var(--white); font-weight: 700; padding: 0.75rem; border-radius: 0.5rem; transition: background-color 0.2s; }
+      .form-btn:hover { background-color: var(--gold-600); }
+      @media (min-width: 768px) { .form-row { grid-template-columns: 1fr 1fr; } }
+      @media (min-width: 1024px) { .contact-grid { grid-template-columns: 1fr 1fr; } }
+
+      /* Footer */
+      .footer { background-color: var(--slate-950); color: var(--slate-400); padding: 3rem 0; }
+      .footer-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem; border-bottom: 1px solid var(--slate-800); padding-bottom: 2rem; }
+      .footer h3 { color: var(--white); font-size: 1.125rem; font-weight: 700; margin-bottom: 1rem; }
+      .footer h4 { color: var(--white); font-weight: 600; margin-bottom: 1rem; }
+      .footer-links { list-style: none; }
+      .footer-links li { margin-bottom: 0.5rem; }
+      .footer-links a { font-size: 0.875rem; }
+      .footer-links a:hover { color: var(--gold-500); }
+      .footer-bottom { display: flex; flex-direction: column; font-size: 0.75rem; gap: 0.5rem; }
+      @media (min-width: 768px) { 
+        .footer-grid { grid-template-columns: 2fr 1fr 1fr; } 
+        .footer-bottom { flex-direction: row; justify-content: space-between; }
+      }
+
+      /* AI Assistant */
+      .ai-widget { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 50; display: flex; flex-direction: column; align-items: flex-end; }
+      .chat-window { width: 20rem; height: 500px; background-color: var(--white); border-radius: 1rem; border: 1px solid var(--slate-200); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); display: none; flex-direction: column; overflow: hidden; margin-bottom: 1rem; animation: slideUp 0.3s ease-out; }
+      .chat-window.open { display: flex; }
+      @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+      
+      .chat-header { background-color: var(--slate-900); padding: 1rem; color: var(--white); display: flex; justify-content: space-between; align-items: center; }
+      .chat-header-info { display: flex; align-items: center; gap: 0.5rem; }
+      .bot-icon { background-color: var(--gold-500); padding: 0.375rem; border-radius: 50%; display: flex; }
+      .close-btn { color: var(--slate-400); background: none; padding: 0; }
+      .close-btn:hover { color: var(--white); }
+      
+      .chat-messages { flex: 1; overflow-y: auto; padding: 1rem; background-color: var(--slate-50); display: flex; flex-direction: column; gap: 1rem; }
+      .msg-wrapper { display: flex; width: 100%; }
+      .msg-wrapper.user { justify-content: flex-end; }
+      .msg-wrapper.model { justify-content: flex-start; }
+      .msg-bubble { max-width: 85%; padding: 0.75rem 1rem; border-radius: 1rem; font-size: 0.875rem; }
+      .msg-bubble.user { background-color: var(--slate-900); color: var(--white); border-top-right-radius: 0; }
+      .msg-bubble.model { background-color: var(--white); color: var(--slate-700); border: 1px solid var(--slate-200); border-top-left-radius: 0; }
+      
+      .chat-input { padding: 0.75rem; background-color: var(--white); border-top: 1px solid var(--slate-100); display: flex; gap: 0.5rem; }
+      .input-field { flex: 1; background-color: var(--slate-50); border: 1px solid var(--slate-200); border-radius: 9999px; padding: 0.5rem 1rem; font-size: 0.875rem; outline: none; }
+      .input-field:focus { border-color: var(--gold-500); }
+      .send-btn { background-color: var(--gold-500); color: var(--white); border-radius: 50%; width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; }
+      .send-btn:disabled { opacity: 0.5; }
+      .send-btn:hover:not(:disabled) { background-color: var(--gold-600); }
+
+      .typing-dots { display: flex; gap: 0.25rem; }
+      .dot { width: 0.5rem; height: 0.5rem; background-color: var(--slate-400); border-radius: 50%; animation: bounce 1s infinite; }
+      .dot:nth-child(2) { animation-delay: 0.1s; }
+      .dot:nth-child(3) { animation-delay: 0.2s; }
+      @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
+      .toggle-chat-btn { padding: 1rem; border-radius: 50%; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; transition: transform 0.2s; }
+      .toggle-chat-btn:hover { transform: scale(1.05); }
+      .toggle-chat-btn.closed { background-color: var(--gold-500); color: var(--white); }
+      .toggle-chat-btn.open { background-color: var(--slate-700); color: var(--white); }
+      
+      @media (min-width: 640px) { .chat-window { width: 24rem; } }
+    </style>
+    <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <!-- Navbar -->
+    <nav id="navbar" class="navbar">
+      <div class="container">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center">
+            <span id="nav-brand" class="nav-brand desktop-white">
+              Hon. Mavetera
+            </span>
+          </div>
+          
+          <!-- Desktop Menu -->
+          <div class="nav-desktop">
+            <a href="#home" class="nav-link">Home</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#experience" class="nav-link">Experience</a>
+            <a href="#education" class="nav-link">Education</a>
+            <a href="#contact" class="nav-link">Contact</a>
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <div class="md-hidden">
+            <button id="mobile-menu-btn" class="nav-mobile-btn">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="mobile-menu md-hidden">
+        <div class="flex-col">
+          <a href="#home" class="mobile-link">Home</a>
+          <a href="#about" class="mobile-link">About</a>
+          <a href="#experience" class="mobile-link">Experience</a>
+          <a href="#education" class="mobile-link">Education</a>
+          <a href="#contact" class="mobile-link">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <!-- Hero -->
+      <section id="home" class="hero">
+        <div class="hero-bg">
+          <img src="https://picsum.photos/seed/harare_skyline/1920/1080" alt="Zimbabwe Landscape" />
+          <div class="hero-overlay"></div>
+        </div>
+
+        <div class="container hero-content md-text-left">
+          <div class="md-block" style="max-width: 66%">
+            <div class="hero-badge">
+              <span>Republic of Zimbabwe</span>
+            </div>
+            <h1>
+              Honourable <br />
+              <span class="text-gradient">Tatenda Mavetera</span>
+            </h1>
+            <p>
+              Minister of Information, Communication Technology, Postal & Courier Services. 
+              Member of Parliament for Chikomba West. Championing digital transformation and youth empowerment.
+            </p>
+            <div class="btn-group">
+              <a href="#experience" class="btn btn-primary">
+                View Profile 
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+              <a href="#contact" class="btn btn-secondary">
+                Contact Office
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="hero-deco"></div>
+      </section>
+
+      <!-- About -->
+      <section id="about" class="section bg-white">
+        <div class="container">
+          <div class="grid about-grid">
+            <div class="about-img-wrapper">
+              <img src="https://picsum.photos/seed/portrait_minister/600/700" alt="Hon Tatenda Mavetera" />
+              <div class="about-bg-deco"></div>
+            </div>
+            
+            <div class="about-text">
+              <h2 class="section-subtitle">Biography</h2>
+              <h3 class="section-title">A Visionary Leader for Zimbabwe's Digital Future</h3>
+              <p>
+                Hon. Tatenda Mavetera is a dynamic leader and the current Minister of Information, Communication Technology, Postal and Courier Services for the Republic of Zimbabwe. A champion for youth and women's empowerment, she serves as the Member of Parliament for Chikomba West. With a strong background in strategic marketing and business leadership, Hon. Mavetera is driving Zimbabwe's digital future while fostering inclusive economic growth through her role as the Founding Chairman of Young Women for Economic Development.
+              </p>
+              <p>
+                Her journey from a prominent actress to a pivotal political figure demonstrates her multifaceted talent and dedication to public service. Currently pursuing a Doctorate in Business Leadership, she combines academic rigor with practical governance experience.
+              </p>
+
+              <div class="about-stats">
+                <div class="stat-card gold">
+                  <span class="stat-val">2023</span>
+                  <span class="stat-label">Appointed Minister of ICTPCS</span>
+                </div>
+                <div class="stat-card dark">
+                  <span class="stat-val">YWED</span>
+                  <span class="stat-label">Founding National Chair</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Experience Timeline -->
+      <section id="experience" class="section bg-slate-50">
+        <div class="container">
+          <div class="text-center" style="margin-bottom: 4rem">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="divider"></div>
+            <p style="max-width: 42rem; margin: 1rem auto; color: var(--slate-600)">
+              A dedicated timeline of service to the nation, strategic leadership, and community development.
+            </p>
+          </div>
+
+          <div class="timeline-container">
+            <div class="timeline-line"></div>
+
+            <!-- Item 1 -->
+            <div class="timeline-item left">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content-wrapper">
+                <div class="timeline-card">
+                  <div class="timeline-meta hidden md-block" style="justify-content: flex-end; display: none;">September 2023 - Present</div>
+                  <div class="timeline-meta md-hidden">September 2023 - Present</div>
+                  <h3>Minister of ICTPCS</h3>
+                  <div class="timeline-org">Republic of Zimbabwe</div>
+                  <p class="timeline-desc">Leading the national digital transformation agenda, overseeing telecommunications policy, and driving connectivity initiatives across Zimbabwe.</p>
+                  <div class="timeline-tag">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>
+                    Government
+                  </div>
+                </div>
+              </div>
+              <div class="timeline-spacer hidden md-block"></div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="timeline-item right">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content-wrapper">
+                <div class="timeline-card">
+                  <div class="timeline-meta hidden md-block" style="justify-content: flex-start; display: none;">September 2023 - Present</div>
+                   <div class="timeline-meta md-hidden">September 2023 - Present</div>
+                  <h3>Member of Parliament (Chikomba West)</h3>
+                  <div class="timeline-org">Parliament of Zimbabwe</div>
+                  <div class="timeline-tag">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><path d="m14.5 12.5-8 8a2.119 2.119 0 0 1-3-3l8-8"/><path d="m16 16 6-6"/><path d="m8 8 6-6"/><path d="m9 7 8 8"/><path d="m21 11-8-8"/></svg>
+                    Political
+                  </div>
+                </div>
+              </div>
+              <div class="timeline-spacer hidden md-block"></div>
+            </div>
+
+             <!-- Item 3 -->
+            <div class="timeline-item left">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content-wrapper">
+                <div class="timeline-card">
+                  <div class="timeline-meta hidden md-block" style="justify-content: flex-end; display: none;">December 2021 - Present</div>
+                   <div class="timeline-meta md-hidden">December 2021 - Present</div>
+                  <h3>Provincial Spokesperson</h3>
+                  <div class="timeline-org">ZANU PF (Mashonaland East)</div>
+                  <div class="timeline-tag">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><path d="m14.5 12.5-8 8a2.119 2.119 0 0 1-3-3l8-8"/><path d="m16 16 6-6"/><path d="m8 8 6-6"/><path d="m9 7 8 8"/><path d="m21 11-8-8"/></svg>
+                    Political
+                  </div>
+                </div>
+              </div>
+              <div class="timeline-spacer hidden md-block"></div>
+            </div>
+
+             <!-- Item 4 -->
+             <div class="timeline-item right">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content-wrapper">
+                <div class="timeline-card">
+                  <div class="timeline-meta hidden md-block" style="justify-content: flex-start; display: none;">August 2020 - Present</div>
+                   <div class="timeline-meta md-hidden">August 2020 - Present</div>
+                  <h3>National Founding Chairman</h3>
+                  <div class="timeline-org">Young Women for Economic Development (YWED)</div>
+                  <p class="timeline-desc">Championing economic empowerment and opportunities for young women across the nation.</p>
+                  <div class="timeline-tag">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    Civic
+                  </div>
+                </div>
+              </div>
+              <div class="timeline-spacer hidden md-block"></div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Education -->
+      <section id="education" class="section bg-white">
+        <div class="container">
+          <div class="flex flex-col md-flex-row justify-between" style="align-items: flex-end; margin-bottom: 3rem">
+            <div>
+              <h2 class="section-title">Academic Qualifications</h2>
+              <div class="divider" style="margin: 1rem 0 0 0; width: 5rem"></div>
+            </div>
+            <div style="margin-top: 1rem">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--slate-100)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+          </div>
+
+          <div class="grid edu-grid">
+            <!-- Edu 1 -->
+            <div class="edu-card">
+              <div class="edu-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+              </div>
+              <h3>Doctorate in Business Leadership (Candidate)</h3>
+              <p>Midlands State University</p>
+              <div class="edu-footer">
+                <span class="edu-period">2019 - 2026</span>
+                <span class="edu-status status-progress">In Progress</span>
+              </div>
+            </div>
+
+             <!-- Edu 2 -->
+             <div class="edu-card">
+              <div class="edu-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+              </div>
+              <h3>Masters Degree in Strategic Marketing</h3>
+              <p>Midlands State University</p>
+              <div class="edu-footer">
+                <span class="edu-period">2015 - 2017</span>
+                <span class="edu-status status-completed">Completed</span>
+              </div>
+            </div>
+
+             <!-- Edu 3 -->
+             <div class="edu-card">
+              <div class="edu-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+              </div>
+              <h3>BSc Hon. in Management and Marketing</h3>
+              <p>Women's University in Africa</p>
+              <div class="edu-footer">
+                <span class="edu-period">2011 - 2015</span>
+                <span class="edu-status status-completed">Completed</span>
+              </div>
+            </div>
+
+             <!-- Edu 4 -->
+             <div class="edu-card">
+              <div class="edu-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+              </div>
+              <h3>Diploma in Shipping Forwarding Courier Services</h3>
+              <p>ABMA</p>
+              <div class="edu-footer">
+                <span class="edu-period">2012 - 2014</span>
+                <span class="edu-status status-completed">Completed</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="section bg-slate-900" style="color: var(--white)">
+        <div class="container">
+          <div class="grid contact-grid">
+            
+            <div class="contact-left">
+              <h2 class="section-title" style="color: var(--white)">Connect with the Ministry</h2>
+              <p>For official inquiries regarding ICT policies, constituency matters in Chikomba West, or media requests.</p>
+              
+              <div style="display: flex; flex-direction: column; gap: 1.5rem">
+                <div class="contact-item">
+                  <div class="icon-box">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                  </div>
+                  <div class="contact-info">
+                    <h4>Office Location</h4>
+                    <p>Harare, Zimbabwe</p>
+                  </div>
+                </div>
+
+                <div class="contact-item">
+                  <div class="icon-box">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                  </div>
+                  <div class="contact-info">
+                    <h4>Email</h4>
+                    <p>info@ictminister.gov.zw</p>
+                  </div>
+                </div>
+
+                <a href="https://www.linkedin.com/in/hon-tatenda-mavetera-7821b96b/" target="_blank" rel="noopener noreferrer" class="contact-link contact-item">
+                  <div class="icon-box">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                  </div>
+                  <div class="contact-info">
+                    <h4>LinkedIn</h4>
+                    <p>Connect on Professional Network</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <div class="contact-form">
+              <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem">Send a Message</h3>
+              <form onsubmit="event.preventDefault()">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">First Name</label>
+                    <input type="text" class="form-input" placeholder="Jane" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Last Name</label>
+                    <input type="text" class="form-input" placeholder="Doe" />
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label">Email Address</label>
+                  <input type="email" class="form-input" placeholder="jane@example.com" />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Subject</label>
+                  <select class="form-select">
+                      <option>General Inquiry</option>
+                      <option>Press / Media</option>
+                      <option>Constituency Matter</option>
+                      <option>Invitation</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Message</label>
+                  <textarea rows="4" class="form-textarea" placeholder="Your message here..."></textarea>
+                </div>
+
+                <button class="form-btn">Send Message</button>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <h3>Hon. Tatenda Mavetera</h3>
+            <p style="max-width: 20rem; font-size: 0.875rem; line-height: 1.5">
+              Serving the Republic of Zimbabwe through digital innovation, legislative representation, and community empowerment.
+            </p>
+          </div>
+          
+          <div>
+            <h4>Quick Links</h4>
+            <ul class="footer-links">
+              <li><a href="#home">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#experience">Experience</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4>Government</h4>
+            <ul class="footer-links">
+              <li><a href="#" class="flex items-center" style="gap: 0.5rem"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Ministry of ICT</a></li>
+              <li><a href="#" class="flex items-center" style="gap: 0.5rem"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Parliament of Zimbabwe</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p>&copy; 2023 Office of Hon. Tatenda Mavetera. All rights reserved.</p>
+          <p>Designed for Zimbabwe.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- AI Widget -->
+    <div class="ai-widget">
+      <div id="chat-window" class="chat-window">
+        <div class="chat-header">
+          <div class="chat-header-info">
+            <div class="bot-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+            </div>
+            <div>
+              <h3 style="font-size: 0.875rem; font-weight: 600">Virtual Assistant</h3>
+              <p style="font-size: 0.75rem; color: var(--slate-400)">Powered by Gemini</p>
+            </div>
+          </div>
+          <button id="close-chat-btn" class="close-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+
+        <div id="chat-messages" class="chat-messages">
+          <div class="msg-wrapper model">
+            <div class="msg-bubble model">
+              Greetings! I am the AI Assistant for Hon. Tatenda Mavetera. How can I help you learn more about her work or background today?
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-input">
+          <input type="text" id="input-field" placeholder="Ask about Hon. Mavetera..." class="input-field" />
+          <button id="send-btn" class="send-btn" disabled>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <button id="toggle-chat-btn" class="toggle-chat-btn closed">
+        <svg id="open-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <svg id="close-icon" class="hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
